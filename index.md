@@ -1,37 +1,24 @@
-## Welcome to GitHub Pages
+## Viktor Kocur
 
-You can use the [editor on GitHub](https://github.com/kocurvik/kocurvik.github.io/edit/main/index.md) to maintain and preview the content for your website in Markdown files.
+<img src="https://avatars.githubusercontent.com/u/18339124?s=400&u=e8f50076b20ac593b99ab6d6ceccd16951087f9d&v=4" width="200" />
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Education
 
-### Markdown
+- 2012-2015 - Bc. Computational Physics at FNSPE, CTU in Prague
+- 2015-2017 - Ing. Computational Physics at FNSPE, CTU in Prague
+- 2017-2021 - PhD. Computer Science at FMPH, Comenius University in Bratislava
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Work
 
-```markdown
-Syntax highlighted code block
+- 2021-present - Assistant Professor at FMPH, Comenius University in Bratislava
+- 2021-present - Researcher at FIT, BUT in Brno
 
-# Header 1
-## Header 2
-### Header 3
+### Publications
 
-- Bulleted
-- List
+My ORCID is: [0000-0001-8752-2685](https://orcid.org/0000-0001-8752-2685)
 
-1. Numbered
-2. List
+You can also check out my publications on [Google Scholar](https://scholar.google.com/citations?user=9vesUuQAAAAJ&hl=en) or [ResarchGate](https://www.researchgate.net/profile/Viktor-Kocur).
 
-**Bold** and _Italic_ and `Code` text
+### Teaching
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kocurvik/kocurvik.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+I currently teach computer vision courses at FMPH, Comenius Univeristy in Bratislava. The materials for the courses can be found in a separate [repository.](https://github.com/kocurvik/edu)
