@@ -11,7 +11,7 @@
 ### Work
 
 - 2021-present - Assistant Professor at FMPH, Comenius University in Bratislava
-- 2021-present - Researcher at FIT, BUT in Brno
+- 2021-2023 - Postdoc at FIT, BUT in Brno
 
 ### Publications
 
@@ -21,7 +21,7 @@ You can also check out my publications on [Google Scholar](https://scholar.googl
 
 ### Published code
 
-I usually publish code related to my research activities on [my GitHub](https://github.com/kocurvik)
+I usually publish code related to my research activities on [my GitHub](https://github.com/kocurvik).
 
 ### Teaching
 
