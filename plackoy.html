@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placko-y Game</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #selection-screen, #game-screen, #winner-screen {
+            display: none;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        #selection-screen {
+            display: block;
+			float: left;
+        }
+        
+        .color-option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .color-preview.selected {
+            border: 2px solid black;
+        }
+        
+        .player-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        
+        .grid-size-section {
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #grid-container {
+            display: grid;
+            gap: 5px;
+            margin: 20px 0;
+        }
+        
+        .cell {
+            width: 60px;
+            height: 60px;
+            background-color: #eee;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cell.clickable {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            background-color: #f9f9f9;
+        }
+        
+        .cell.clickable:hover {
+            transform: scale(1.05);
+        }
+        
+        .game-info {
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .player-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        #winner-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Placko-y</h1>
+    
+    <div id="game-container">
+        <!-- Selection Screen -->
+        <div id="selection-screen">
+            <h2>Game Setup</h2>
+            
+            <div class="player-section">
+                <h3>Player 1</h3>
+                <div class="color-options" style="display: flex; gap: 0.5rem;">
+                    <div class="color-option">
+                        <div class="color-preview selected" data-color="#FF5733" style="background-color: #FF5733;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#33A1FF" style="background-color: #33A1FF;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#33FF57" style="background-color: #33FF57;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#F3FF33" style="background-color: #F3FF33;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-section">
+                <h3>Player 2</h3>
+                <div class="color-options" style="display: flex; gap: 0.5rem;">
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#FF5733" style="background-color: #FF5733;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview selected" data-color="#33A1FF" style="background-color: #33A1FF;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#33FF57" style="background-color: #33FF57;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#F3FF33" style="background-color: #F3FF33;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="player-section">
+                <h3>Player 3 (Optional)</h3>
+                <div class="color-options" style="display: flex; gap: 0.5rem;">
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#FF5733" style="background-color: #FF5733;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#33A1FF" style="background-color: #33A1FF;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#33FF57" style="background-color: #33FF57;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview" data-color="#F3FF33" style="background-color: #F3FF33;"></div>
+                    </div>
+                    <div class="color-option">
+                        <div class="color-preview selected" data-color="none" style="background-color: #ccc; position: relative;">
+                            <div style="position: absolute; width: 100%; height: 2px; background-color: red; top: 50%; transform: rotate(45deg);"></div>
+                            <div style="position: absolute; width: 100%; height: 2px; background-color: red; top: 50%; transform: rotate(-45deg);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-size-section">
+                <h3>Grid Size</h3>
+                <label for="grid-size">Size: </label>
+                <select id="grid-size">
+                    <option value="4">4 x 4</option>
+                    <option value="5">5 x 5</option>
+                    <option value="6" selected>6 x 6</option>
+                    <option value="7">7 x 7</option>
+                    <option value="8">8 x 8</option>
+                </select>
+            </div>
+            
+            <button id="start-game">Start Game</button>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen">
+            <div class="game-info">
+                <p id="turn-info">Player 1's turn</p>
+                <p id="round-info">Round: 1</p>
+            </div>
+            
+            <div id="grid-container"></div>
+        </div>
+        
+        <!-- Winner Screen -->
+        <div id="winner-screen">
+            <div id="winner-message"></div>
+            <button id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Cell class to represent each grid cell
+        class Cell {
+            constructor(row, col) {
+                this.row = row;
+                this.col = col;
+                this.claimed = false;
+                this.claimedBy = null;
+                this.element = null;
+            }
+            
+            claim(playerId) {
+                this.claimed = true;
+                this.claimedBy = playerId;
+                return this;
+            }
+            
+            isClaimed() {
+                return this.claimed;
+            }
+            
+            getClaimedBy() {
+                return this.claimedBy;
+            }
+            
+            getCoordinates() {
+                return { row: this.row, col: this.col };
+            }
+        }
+        
+        // Grid class to manage the game grid
+        class Grid {
+            constructor(size) {
+                this.size = size;
+                this.cells = [];
+                this.initializeGrid();
+            }
+            
+            initializeGrid() {
+                this.cells = [];
+                for (let row = 0; row < this.size; row++) {
+                    const rowCells = [];
+                    for (let col = 0; col < this.size; col++) {
+                        rowCells.push(new Cell(row, col));
+                    }
+                    this.cells.push(rowCells);
+                }
+            }
+            
+            getCell(row, col) {
+                if (row >= 0 && row < this.size && col >= 0 && col < this.size) {
+                    return this.cells[row][col];
+                }
+                return null;
+            }
+            
+            getAdjacentCells(row, col) {
+                const adjacentCells = [];
+                const directions = [
+                    { row: -1, col: 0 }, // up
+                    { row: 1, col: 0 },  // down
+                    { row: 0, col: -1 }, // left
+                    { row: 0, col: 1 }   // right
+                ];
+                
+                for (const dir of directions) {
+                    const newRow = row + dir.row;
+                    const newCol = col + dir.col;
+                    const cell = this.getCell(newRow, newCol);
+                    if (cell) {
+                        adjacentCells.push(cell);
+                    }
+                }
+                
+                return adjacentCells;
+            }
+            
+            getAvailableCells(playerId, round) {
+                const availableCells = [];
+                
+                // If it's round 1, all unclaimed cells are available
+                
+                // If it's round 2, only adjacent cells to the player's first cell are available
+                
+                // For all other rounds, players can claim any empty cell that is not adjacent to any opponent's cell
+                const playerCells = [];
+                const opponentCells = [];
+                
+                // Separate player and opponent cells
+                for (let row = 0; row < this.size; row++) {
+                    for (let col = 0; col < this.size; col++) {
+                        const cell = this.cells[row][col];
+                        if (cell.isClaimed()) {
+                            if (cell.getClaimedBy() === playerId) {
+                                playerCells.push(cell);
+                            } else {
+                                opponentCells.push(cell);
+                            }
+                        }
+                    }
+                }
+                
+                // Find all cells adjacent to opponents' cells
+                const adjacentToOpponents = new Set();
+                for (const oppCell of opponentCells) {
+                    const { row, col } = oppCell.getCoordinates();
+                    const adjacentCells = this.getAdjacentCells(row, col);
+                    
+                    for (const adjCell of adjacentCells) {
+                        const { row: adjRow, col: adjCol } = adjCell.getCoordinates();
+                        adjacentToOpponents.add(`${adjRow},${adjCol}`);
+                    }
+                }
+				
+				
+				if (round === 2) {
+                    let playerFirstCell = null;
+                    
+                    // Find the player's first claimed cell
+                    for (let row = 0; row < this.size; row++) {
+                        for (let col = 0; col < this.size; col++) {
+                            const cell = this.cells[row][col];
+                            if (cell.isClaimed() && cell.getClaimedBy() === playerId) {
+                                playerFirstCell = cell;
+                                break;
+                            }
+                        }
+                        if (playerFirstCell) break;
+                    }
+                    
+                    if (playerFirstCell) {
+                        const { row, col } = playerFirstCell.getCoordinates();
+                        const adjacentCells = this.getAdjacentCells(row, col);
+						
+                        for (const adjCell of adjacentCells) {
+							const { row, col } = adjCell.getCoordinates();
+						    const coordKey = `${row},${col}`;
+                            if (!adjCell.isClaimed() && !adjacentToOpponents.has(coordKey)) {
+                                availableCells.push(adjCell);
+                            }
+                        }
+                    }
+                    
+                    return availableCells;
+                }
+				
+                
+                // Add all unclaimed cells that are not adjacent to opponents
+                for (let row = 0; row < this.size; row++) {
+                    for (let col = 0; col < this.size; col++) {
+                        const cell = this.cells[row][col];
+                        const coordKey = `${row},${col}`;
+                        
+                        if (!cell.isClaimed() && !adjacentToOpponents.has(coordKey)) {
+                            availableCells.push(cell);
+                        }
+                    }
+                }
+                
+                return availableCells;
+            }
+        }
+        
+        // Game class to manage game state
+        class Game {
+            constructor() {
+                this.players = [];
+                this.grid = null;
+                this.currentPlayerIndex = 0;
+                this.round = 1;
+                this.playerRounds = {};
+                this.activePlayers = [];
+                this.gameOver = false;
+                
+                this.setupEventListeners();
+            }
+            
+            setupEventListeners() {
+                // Color selection for players
+                document.querySelectorAll('.color-preview').forEach(colorElement => {
+                    colorElement.addEventListener('click', (e) => {
+                        const playerSection = e.target.closest('.player-section');
+                        playerSection.querySelectorAll('.color-preview').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        e.target.classList.add('selected');
+                    });
+                });
+                
+                // Start game button
+                document.getElementById('start-game').addEventListener('click', () => {
+                    this.initializeGame();
+                });
+                
+                // Play again button
+                document.getElementById('play-again').addEventListener('click', () => {
+                    document.getElementById('winner-screen').style.display = 'none';
+                    document.getElementById('selection-screen').style.display = 'block';
+                });
+            }
+            
+            initializeGame() {
+                // Get selected colors for each player
+                const players = [];
+                
+                document.querySelectorAll('.player-section').forEach((section, index) => {
+                    const selectedColor = section.querySelector('.color-preview.selected').getAttribute('data-color');
+                    if (selectedColor !== 'none') {
+                        players.push({
+                            id: index + 1,
+                            color: selectedColor,
+                            name: `Player ${index + 1}`
+                        });
+                    }
+                });
+                
+                // Check if at least 2 players are in the game
+                if (players.length < 2) {
+                    alert('You need at least 2 players with different colors!');
+                    return;
+                }
+                
+                // Check if players have unique colors
+                const colors = players.map(p => p.color);
+                if (new Set(colors).size !== colors.length) {
+                    alert('Each player must choose a different color!');
+                    return;
+                }
+                
+                // Get selected grid size
+                const gridSize = parseInt(document.getElementById('grid-size').value);
+                
+                // Initialize game state
+                this.players = players;
+                this.grid = new Grid(gridSize);
+                this.currentPlayerIndex = 0;
+                this.round = 1;
+                this.playerRounds = {};
+                players.forEach(player => {
+                    this.playerRounds[player.id] = 1;
+                });
+                this.activePlayers = [...players];
+                this.gameOver = false;
+                
+                // Switch to game screen
+                document.getElementById('selection-screen').style.display = 'none';
+                document.getElementById('game-screen').style.display = 'block';
+                
+                // Create grid UI
+                this.createGridUI();
+                
+                // Update game info display
+                this.updateGameInfo();
+                
+                // Highlight available cells for first player
+                this.updateClickableCells();
+            }
+            
+            createGridUI() {
+                const gridContainer = document.getElementById('grid-container');
+                gridContainer.innerHTML = '';
+                gridContainer.style.gridTemplateColumns = `repeat(${this.grid.size}, 1fr)`;
+                
+                for (let row = 0; row < this.grid.size; row++) {
+                    for (let col = 0; col < this.grid.size; col++) {
+                        const cellElement = document.createElement('div');
+                        cellElement.className = 'cell';
+                        cellElement.dataset.row = row;
+                        cellElement.dataset.col = col;
+                        
+                        cellElement.addEventListener('click', (e) => {
+                            if (cellElement.classList.contains('clickable') && !this.gameOver) {
+                                this.makeMove(row, col);
+                            }
+                        });
+                        
+                        gridContainer.appendChild(cellElement);
+                        this.grid.getCell(row, col).element = cellElement;
+                    }
+                }
+            }
+            
+            updateGameInfo() {
+                const currentPlayer = this.activePlayers[this.currentPlayerIndex];
+                document.getElementById('turn-info').innerHTML = `
+                    <span class="player-indicator" style="background-color: ${currentPlayer.color}"></span>
+                    ${currentPlayer.name}'s turn
+                `;
+                document.getElementById('round-info').textContent = `Round: ${this.round}`;
+            }
+            
+            updateClickableCells() {
+                // Reset all cells
+                document.querySelectorAll('.cell').forEach(cell => {
+                    cell.classList.remove('clickable');
+                });
+                
+                if (this.gameOver) return;
+                
+                const currentPlayer = this.activePlayers[this.currentPlayerIndex];
+                const playerRound = this.playerRounds[currentPlayer.id];
+                const availableCells = this.grid.getAvailableCells(currentPlayer.id, playerRound);
+                
+                availableCells.forEach(cell => {
+                    const { row, col } = cell.getCoordinates();
+                    const cellElement = this.grid.getCell(row, col).element;
+                    cellElement.classList.add('clickable');
+                });
+                
+                // Check if current player has no moves
+                if (availableCells.length === 0) {
+                    this.eliminatePlayer(currentPlayer.id);
+                }
+            }
+            
+            makeMove(row, col) {
+                const currentPlayer = this.activePlayers[this.currentPlayerIndex];
+                const cell = this.grid.getCell(row, col);
+                
+                // Claim the cell
+                cell.claim(currentPlayer.id);
+                cell.element.style.backgroundColor = currentPlayer.color;
+                cell.element.classList.remove('clickable');
+                
+                // Update player's round
+                this.playerRounds[currentPlayer.id]++;
+                
+                // Move to next player
+                this.nextTurn();
+            }
+            
+            nextTurn() {
+                // Move to next player
+                this.currentPlayerIndex = (this.currentPlayerIndex + 1) % this.activePlayers.length;
+                
+                // Update round if we've gone through all players
+                if (this.currentPlayerIndex === 0) {
+                    this.round++;
+                }
+                
+                // Update game info
+                this.updateGameInfo();
+                
+                // Update clickable cells
+                this.updateClickableCells();
+            }
+            
+            eliminatePlayer(playerId) {
+                // Remove player from active players
+                this.activePlayers = this.activePlayers.filter(player => player.id !== playerId);
+                
+                // Check if game is over
+                if (this.activePlayers.length <= 1) {
+                    this.endGame();
+                } else {
+                    // Move to next player
+                    this.currentPlayerIndex = this.currentPlayerIndex % this.activePlayers.length;
+                    this.updateGameInfo();
+                    this.updateClickableCells();
+                }
+            }
+            
+            endGame() {
+                this.gameOver = true;
+                
+                // Show winner screen
+                document.getElementById('game-screen').style.display = 'none';
+                document.getElementById('winner-screen').style.display = 'block';
+                
+                if (this.activePlayers.length === 1) {
+                    const winner = this.activePlayers[0];
+                    document.getElementById('winner-message').innerHTML = `
+                        <span class="player-indicator" style="background-color: ${winner.color}"></span>
+                        ${winner.name} wins!
+                    `;
+                } else {
+                    document.getElementById('winner-message').textContent = "It's a tie!";
+                }
+            }
+        }
+        
+        // Initialize the game
+        const game = new Game();
+    </script>
+</body>
+</html>
