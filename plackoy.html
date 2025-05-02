@@ -25,6 +25,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 90%;
             max-width: 800px;
             padding: 20px;
             box-sizing: border-box;
@@ -41,7 +42,6 @@
         
         #selection-screen {
             display: block;
-			float: left;
         }
         
         .color-option {
@@ -93,11 +93,12 @@
             display: grid;
             gap: 5px;
             margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
         }
         
         .cell {
-            width: 60px;
-            height: 60px;
+            aspect-ratio: 1 / 1;
             background-color: #eee;
             border-radius: 5px;
             cursor: pointer;
@@ -137,6 +138,31 @@
             font-size: 24px;
             margin-bottom: 20px;
             text-align: center;
+        }
+
+        /* Media queries for responsive design */
+        @media (max-width: 600px) {
+            #game-container {
+                width: 95%;
+                padding: 10px;
+            }
+            
+            #grid-container {
+                gap: 3px;
+            }
+            
+            button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .game-info {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -439,6 +465,13 @@
                     document.getElementById('winner-screen').style.display = 'none';
                     document.getElementById('selection-screen').style.display = 'block';
                 });
+                
+                // Window resize handler
+                window.addEventListener('resize', () => {
+                    if (this.grid) {
+                        this.updateGridSize();
+                    }
+                });
             }
             
             initializeGame() {
@@ -520,6 +553,12 @@
                         this.grid.getCell(row, col).element = cellElement;
                     }
                 }
+            }
+            
+            updateGridSize() {
+                // This function ensures the grid scales properly after window resize
+                const gridContainer = document.getElementById('grid-container');
+                gridContainer.style.gridTemplateColumns = `repeat(${this.grid.size}, 1fr)`;
             }
             
             updateGameInfo() {
