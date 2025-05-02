@@ -70,7 +70,7 @@
             border-radius: 5px;
         }
         
-        .grid-size-section {
+        .grid-size-section, .game-rules-section {
             margin-top: 20px;
         }
         
@@ -168,6 +168,45 @@
         
         .player-cells {
             margin-left: auto;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-wrapper input {
+            margin-right: 10px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            margin-left: 10px;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 250px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
         }
 
         /* Media queries for responsive design */
@@ -276,6 +315,17 @@
                 </select>
             </div>
             
+            <div class="game-rules-section">
+                <h3>Game Rules</h3>
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="round2-rule" checked>
+                    <label for="round2-rule">Enable Round 2 Special Rule</label>
+                    <div class="tooltip">ⓘ
+                        <span class="tooltiptext">When enabled, in round 2 players can only claim cells adjacent to their first cell. When disabled, normal rules apply to all rounds.</span>
+                    </div>
+                </div>
+            </div>
+            
             <button id="start-game">Start Game</button>
         </div>
         
@@ -333,6 +383,7 @@
                 this.size = size;
                 this.cells = [];
                 this.initializeGrid();
+                this.useRound2Rule = true; // Default to enabled
             }
             
             initializeGrid() {
@@ -377,9 +428,7 @@
             getAvailableCells(playerId, round) {
                 const availableCells = [];
                 
-                // If it's round 2, only adjacent cells to the player's first cell are available
-                
-                // For all other rounds, players can claim any empty cell that is not adjacent to any opponent's cell
+                // Separate player and opponent cells
                 const playerCells = [];
                 const opponentCells = [];
                 
@@ -409,8 +458,8 @@
                     }
                 }
 				
-				
-				if (round === 2) {
+				// If it's round 2 and the rule is enabled, only adjacent cells to the player's first cell are available
+				if (round === 2 && this.useRound2Rule) {
                     let playerFirstCell = null;
                     
                     // Find the player's first claimed cell
@@ -441,7 +490,7 @@
                     return availableCells;
                 }
 				
-                
+                // For all other rounds or if round 2 rule is disabled, players can claim any empty cell that is not adjacent to any opponent's cell
                 // Add all unclaimed cells that are not adjacent to opponents
                 for (let row = 0; row < this.size; row++) {
                     for (let col = 0; col < this.size; col++) {
@@ -534,9 +583,13 @@
                 // Get selected grid size
                 const gridSize = parseInt(document.getElementById('grid-size').value);
                 
+                // Get round 2 rule setting
+                const useRound2Rule = document.getElementById('round2-rule').checked;
+                
                 // Initialize game state
                 this.players = players;
                 this.grid = new Grid(gridSize);
+                this.grid.useRound2Rule = useRound2Rule;
                 this.currentPlayerIndex = 0;
                 this.round = 1;
                 this.playerRounds = {};
