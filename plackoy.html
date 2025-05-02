@@ -139,6 +139,36 @@
             margin-bottom: 20px;
             text-align: center;
         }
+        
+        #player-stats {
+            margin: 20px 0;
+            width: 100%;
+        }
+        
+        .player-stat {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        
+        .player-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .player-name {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .player-cells {
+            margin-left: auto;
+        }
 
         /* Media queries for responsive design */
         @media (max-width: 600px) {
@@ -262,6 +292,7 @@
         <!-- Winner Screen -->
         <div id="winner-screen">
             <div id="winner-message"></div>
+            <div id="player-stats"></div>
             <button id="play-again">Play Again</button>
         </div>
     </div>
@@ -345,8 +376,6 @@
             
             getAvailableCells(playerId, round) {
                 const availableCells = [];
-                
-                // If it's round 1, all unclaimed cells are available
                 
                 // If it's round 2, only adjacent cells to the player's first cell are available
                 
@@ -648,15 +677,73 @@
                 document.getElementById('game-screen').style.display = 'none';
                 document.getElementById('winner-screen').style.display = 'block';
                 
-                if (this.activePlayers.length === 1) {
+                // Calculate claimed cells for each player
+                const playerStats = {};
+                let availableCells = 0;
+                
+                // Initialize player stats
+                this.players.forEach(player => {
+                    playerStats[player.id] = {
+                        name: player.name,
+                        color: player.color,
+                        claimedCells: 0
+                    };
+                });
+				
+				const lastPlayer = this.activePlayers[0];
+                
+                // Count claimed cells
+                for (let row = 0; row < this.grid.size; row++) {
+                    for (let col = 0; col < this.grid.size; col++) {
+                        const cell = this.grid.getCell(row, col);
+                        if (cell.isClaimed()) {
+                            const playerId = cell.getClaimedBy();
+                            if (playerStats[playerId]) {
+                                playerStats[playerId].claimedCells++;
+                            }
+                        }
+                    }
+                }
+				
+				playerStats[lastPlayer.id].claimedCells += this.grid.getAvailableCells(lastPlayer.id, -1).length;
+                
+				// Display winner message
+				
+                // Display player stats
+                const statsContainer = document.getElementById('player-stats');
+                statsContainer.innerHTML = '';
+                
+                // Sort players by number of claimed cells (descending)
+                const sortedPlayers = Object.values(playerStats).sort((a, b) => b.claimedCells - a.claimedCells);
+
+                if (sortedPlayers[0].claimedCells == sortedPlayers[1].claimedCells) {
+                    document.getElementById('winner-message').textContent = "It's a tie!";
+                } else {
                     const winner = this.activePlayers[0];
                     document.getElementById('winner-message').innerHTML = `
                         <span class="player-indicator" style="background-color: ${winner.color}"></span>
                         ${winner.name} wins!
                     `;
-                } else {
-                    document.getElementById('winner-message').textContent = "It's a tie!";
+					
                 }
+                
+                sortedPlayers.forEach(player => {
+                    const playerStatDiv = document.createElement('div');
+                    playerStatDiv.className = 'player-stat';
+                    
+                    let statText = `<div class="player-color" style="background-color: ${player.color}"></div>
+                                   <div class="player-name">${player.name}:</div>
+                                   <div class="player-cells">${player.claimedCells}`;
+                    
+                    if (player.potentialCells) {
+                        statText += ` (+ ${player.potentialCells})`;
+                    }
+                    
+                    statText += '</div>';
+                    
+                    playerStatDiv.innerHTML = statText;
+                    statsContainer.appendChild(playerStatDiv);
+                });
             }
         }
         
