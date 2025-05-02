@@ -74,6 +74,30 @@
             margin-top: 20px;
         }
         
+        .rules-explanation {
+            background-color: #f8f8f8;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .rules-explanation ol {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        
+        .rules-explanation li {
+            margin-bottom: 5px;
+        }
+        
+        .rule-explanation {
+            background-color: #f0f7ff;
+            padding: 10px;
+            border-radius: 5px;
+            border-left: 3px solid #33A1FF;
+            margin-top: 10px;
+        }
+        
         button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -317,6 +341,15 @@
             
             <div class="game-rules-section">
                 <h3>Game Rules</h3>
+                <div class="rules-explanation">
+                    <p><strong>Basic Rules:</strong></p>
+                    <ol>
+                        <li>Players take turns claiming empty cells on the grid.</li>
+                        <li>Players cannot claim cells adjacent to any opponent's cells.</li>
+                        <li>If a player has no valid moves, they are eliminated.</li>
+                        <li>The last player remaining wins, claiming the most cells.</li>
+                    </ol>
+                </div>
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="round2-rule" checked>
                     <label for="round2-rule">Enable Round 2 Special Rule</label>
@@ -324,6 +357,9 @@
                         <span class="tooltiptext">When enabled, in round 2 players can only claim cells adjacent to their first cell. When disabled, normal rules apply to all rounds.</span>
                     </div>
                 </div>
+                <p class="rule-explanation">
+                    <strong>Round 2 Special Rule:</strong> When enabled, during round 2 each player can only claim a cell that is directly adjacent (up, down, left, or right) to their first cell. This creates strategic first-turn placement decisions.
+                </p>
             </div>
             
             <button id="start-game">Start Game</button>
