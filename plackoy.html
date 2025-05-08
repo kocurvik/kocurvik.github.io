@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-K6FZG7YXEF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-K6FZG7YXEF');
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placko-y Game</title>
@@ -31,14 +40,15 @@
             box-sizing: border-box;
         }
         
-        #selection-screen, #game-screen, #winner-screen {
-            display: none;
-            width: 100%;
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+		#winner-screen {
+			display: none;
+			width: 100%;
+			background-color: white; /* Keep white background */
+			border-radius: 10px;
+			padding: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			opacity: 0.8; /* Add opacity to make it transparent */
+		}
         
         #selection-screen {
             display: block;
@@ -260,8 +270,7 @@
     </style>
 </head>
 <body>
-    <h1>Placko-y</h1>
-    
+    <h1>Placko-y</h1>   
     <div id="game-container">
         <!-- Selection Screen -->
         <div id="selection-screen">
