@@ -105,6 +105,33 @@
   <script defer src="static/js/bulma-slider.min.js"></script>
   <script defer src="static/js/index.js"></script>
   
+  <!-- typeset latex -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    // MathJax configuration to use $...$ for inline math and $$...$$ for display math
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  
+  <style>
+  /* Custom CSS to center tables */
+  .centered-table {
+    
+    width: auto; 
+    margin-left: auto;
+    margin-right: auto;
+    /* Optional: Remove the 100% width default from Bulma for the is-fullwidth class */
+    /* If you keep is-fullwidth on a table, it will stretch to 100% and this centering won't work */
+  }
+</style>
+  
   <!-- Structured Data for Academic Papers -->
   <script type="application/ld+json">
   {
@@ -481,6 +508,105 @@
 
 
 
+<section class="hero is-small is-light">
+  <div class="hero-body">
+  <div class="container">
+  
+  
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+  <div class="content has-text-justified ">
+  <h3 class="title is-8 has-text-centered">Extended Results</h3>
+  <p>
+  Since the camera-ready version of the paper we have implemented an improved optimization strategy. Similarly to MADPose, we optimize the Sampson error jointly with both the forward and backward reprojection errors. The implementation of this strategy within PoseLib leads to significantly better resutls compared to those reported in our paper. Our method with the improved strategy surpasses the results of MADPose while being 10-20x faster. Below we provide a sample of these results on the Phototourism dataset for the calibrated case.
+  </p>
+  </div>
+  </div>
+  </div>
+  
+                    <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="https://github.com/kocurvik/mdrp/blob/main/EXTENDED_RESULTS.md" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-table"></i>
+                        </span>
+                        <span>Full Extended Results</span>
+                      </a>
+                    </span>
+					</div>
+					</div>
+  
+  
+  
+  <h3 class="title is-8 has-text-centered">Preview - PhotoTourism (calibrated)</h3>
+  
+  <table class="table is-striped is-hoverable centered-table">
+<tr><td rowspan="2"  style="vertical-align : middle;text-align:center;">Depth</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Method</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Scale</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Shift</td><td colspan="3" align="center">SP+LG</td><td align="center" colspan="3">RoMA</td></tr>
+<tr><td>$\epsilon(^\circ)\downarrow$</td><td>mAA $\uparrow$</td><td>Runtime (ms)</td><td>$\epsilon(^\circ)\downarrow$</td><td>mAA $\uparrow$</td><td>Runtime (ms)</td></tr>
+<td rowspan="1" style="vertical-align : middle;text-align:center;">-</td>
+<td>5-Point</td><td></td><td></td> <td>1.42</td><td>76.56</td><td>63.79</td><td>0.78</td><td>86.18</td><td>264.61</td>
+</tr>
+<td rowspan="5" style="vertical-align : middle;text-align:center;">MoGe</td>
+<td>3P-RelDepth</td><td></td><td></td> <td>8.12</td><td>53.40</td><td>55.85</td><td>1.69</td><td>67.22</td><td>221.06</td>
+</tr>
+<tr>
+<td>P3P</td><td></td><td></td> <td>1.40</td><td>77.37</td><td>32.95</td><td>0.78</td><td>86.42</td><td>148.76</td>
+</tr>
+<tr>
+<td>MADPose</td><td>✔</td><td>✔</td> <td>1.27</td><td>80.28</td><td>788.18</td><td>0.87</td><td>86.85</td><td>1753.49</td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td>✔</td> <td><strong>1.24</strong></td><td><strong>81.34</strong></td><td><strong>28.93</strong></td><td><strong>0.74</strong></td><td><strong>88.58</strong></td><td><strong>125.66</strong></td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td></td> <td>1.75</td><td>80.29</td><td>30.11</td><td>1.03</td><td>88.02</td><td>135.95</td>
+</tr>
+<td rowspan="5" style="vertical-align : middle;text-align:center;">UniDepth</td>
+<td>3P-RelDepth</td><td></td><td></td> <td>4.07</td><td>51.60</td><td>52.49</td><td>1.33</td><td>67.56</td><td>214.73</td>
+</tr>
+<tr>
+<td>P3P</td><td></td><td></td> <td>1.40</td><td>77.47</td><td>34.30</td><td>0.78</td><td>86.43</td><td>150.95</td>
+</tr>
+<tr>
+<td>MADPose</td><td>✔</td><td>✔</td> <td>1.15</td><td>82.09</td><td>720.34</td><td>0.78</td><td>87.60</td><td>1695.57</td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td>✔</td> <td><strong>1.04</strong></td><td>83.71</td><td><strong>30.88</strong></td><td><strong>0.69</strong></td><td>89.27</td><td><strong>131.52</strong></td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td></td> <td>1.16</td><td><strong>84.56</strong></td><td>31.19</td><td>0.81</td><td><strong>90.18</strong></td><td>137.26</td>
+</tr>
+</table>
+
+
+<table class="table is-striped is-hoverable centered-table">
+<tr><td rowspan="2"  style="vertical-align : middle;text-align:center;">Depth</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Method</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Scale</td><td rowspan="2"  style="vertical-align : middle;text-align:center;">Shift</td><td colspan="3" align="center">MASt3R</td>
+<tr><td>$\epsilon(^\circ)\downarrow$</td><td>mAA $\uparrow$</td><td>Runtime (ms)</td></tr>
+<td rowspan="1" style="vertical-align : middle;text-align:center;">-</td>
+<td>5-Point</td><td></td><td></td> <td>1.14</td><td>81.66</td><td>137.75</td>
+</tr>
+<tr>
+<td rowspan="5" style="vertical-align : middle;text-align:center;">MASt3R</td>
+<td>3P-RelDepth</td><td></td><td></td> <td><strong>1.13</strong></td><td>80.83</td><td>149.86</td>
+</tr>
+<tr>
+<td>P3P</td><td></td><td></td> <td><strong>1.13</strong></td><td><strong>81.50</strong></td><td><strong>66.06</strong></td>
+</tr>
+<tr>
+<td>MADPose</td><td>✔</td><td>✔</td> <td>2.10</td><td>72.14</td><td>2154.89</td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td>✔</td> <td>29.59</td><td>1.27</td><td>95.77</td>
+</tr>
+<tr>
+<td>Ours</td><td>✔</td><td></td> <td>29.36</td><td>1.28</td><td>121.02</td>
+</tr>
+</table>
+  </div>
+  </div>
+  </section>
 
 
 
