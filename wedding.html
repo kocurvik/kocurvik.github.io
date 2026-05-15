@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Svadba | Zuzana & Viktor</title>
+    <style>
+        /* Importing Arimo and Playfair Display */
+        @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+
+        :root {
+            --primary-pink: #f29cb9; 
+            --soft-white: #ffffff;
+            --deep-black: #121212;
+            --muted-gray: #757575;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif; /* Primary font changed to Arimo */
+            background-color: var(--soft-white);
+            color: var(--deep-black);
+            line-height: 1.8;
+            letter-spacing: 0.2px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 80px 0 40px 0;
+            text-align: center;
+        }
+
+        .artwork-container {
+            max-width: 380px;
+            margin: 0 auto 50px auto;
+        }
+
+        .artwork-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .names {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .event-summary {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--muted-gray);
+            font-weight: 400;
+        }
+
+        .pink-dot {
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            margin: 40px auto;
+        }
+
+        section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+		
+		a {
+			color: var(--deep-black);
+			text-decoration: underline;
+		}
+
+		a:visited {
+			color: var(--deep-black);
+		}
+
+        .details-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin: 40px 0;
+        }
+
+        .detail-col {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .detail-label {
+            font-family: 'Arimo', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted-gray);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .detail-text {
+            font-size: 1.05rem;
+        }
+
+        .btn-rsvp {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 16px 45px;
+            border: 1px solid var(--deep-black);
+            background: transparent;
+            color: var(--deep-black);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .btn-rsvp:hover {
+            background: var(--deep-black);
+            color: var(--soft-white);
+        }
+
+        footer {
+            padding: 100px 0 60px 0;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 650px) {
+            .details-grid {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .names { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="artwork-container">
+                <!-- Referencing the specific file name provided -->
+                <img src="wedding_art_small.webp" alt="Wedding Artwork">
+            </div>
+            <h1 class="names">Zuzana a Viktor</h1>
+            <p class="event-summary">Sobota | 13.6.2026 | Svadbolina | Bíňovce</p>
+            <p class="event-summary">Sobota | 4.7.2026 | Nová Cvernovka | Bratislava</p>
+        </header>
+
+        <span class="pink-dot"></span>
+
+        <section id="invitation">
+            <h2>Svadobný Obrad</h2>
+            <p style="max-width: 600px; margin: 0 auto;">
+                Svadobný obrad sa uskutoční v <a href="https://bistro.svadbolina.sk">Svadboline</a> v Bíňovciach pri Bolerázkej Priehrade 13.6.2026 o 15:00. Po obrade budeme pokračovať hostinou v rodinnom kruhu.
+            </p>
+        </section>
+
+        <section id="invitation">
+            <h2>Posvadobná Párty</h2>
+            <p style="max-width: 600px; margin: 0 auto;">
+                V širšom kruhu našu svadbu oslávime v <a href="https://novacvernovka.eu">Novej Cvernovke</a> 4.7. od 16:00 do 22:00. Detaily upresníme neskôr.
+            </p>
+        </section>
+
+<!--        <section id="details">
+            <div class="details-grid">
+                <div class="detail-col">
+                    <span class="detail-label">The Ceremony</span>
+                    <p class="detail-text">4:30 in the Afternoon<br>St. Mary's Garden<br>Richmond, Surrey</p>
+                </div>
+                <div class="detail-col">
+                    <span class="detail-label">The Reception</span>
+                    <p class="detail-text">6:00 in the Evening<br>The Glasshouse Pavilion<br>Dinner and dancing to follow</p>
+                </div>
+            </div>
+        </section>-->
+
+<!--    <section id="rsvp">
+            <h2>RSVP</h2>
+            <p style="margin-bottom: 30px;">Please let us know if you can join us by August 1st.</p>
+            <a href="mailto:rsvp@ourwedding.com" class="btn-rsvp">Response Requested</a>
+        </section>
+		-->
+
+        <footer>
+            <p>Z a V</p>
+        </footer>
+    </div>
+
+</body>
+</html>
