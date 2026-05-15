@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Svadba | Zuzana & Viktor</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Importing Arimo and Playfair Display */
         @import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
@@ -160,6 +161,24 @@
             }
             .names { font-size: 2.2rem; }
         }
+		
+		.credit {
+			font-family: 'Arimo', sans-serif; /* Using your cleaner font for the credit */
+			font-size: 0.75rem;
+			font-style: normal; /* Removes the italic from the footer parent */
+			letter-spacing: 1px;
+			margin-top: 10px;			
+		}
+
+		.credit a {
+			text-decoration: underline;
+			color: var(--deep-black);
+		}
+
+		.credit i {
+			margin-right: 5px;
+			font-size: 0.9rem;
+		}
     </style>
 </head>
 <body>
@@ -210,10 +229,17 @@
             <a href="mailto:rsvp@ourwedding.com" class="btn-rsvp">Response Requested</a>
         </section>
 		-->
-
-        <footer>
-            <p>Z a V</p>
-        </footer>
+		
+		
+		<footer>
+			<p>Z a V</p>
+			<p class="credit">
+				art by 
+				<a href="https://www.instagram.com/radostinadoganova" target="_blank">
+					<i class="fab fa-instagram"></i>radostinadoganova
+				</a>
+			</p>
+		</footer>
     </div>
 
 </body>
