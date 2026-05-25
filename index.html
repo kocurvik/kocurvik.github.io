@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viktor Kocur</title>
+    <!-- Font Awesome for GitHub Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #1a1a1a;
+            --text-color: #cccccc;
+            --heading-color: #ffffff;
+            --bg-color: #050505;
+            --accent-color: #ffffff;
+            --border-color: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            background-image: linear-gradient(180deg, #000000, #0a0a0a);
+            color: #fff;
+            padding: 5rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .header h2 {
+            font-weight: 300;
+            opacity: 0.7;
+            font-size: 1.1rem;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid #333;
+            filter: grayscale(20%);
+            box-shadow: 0 0 30px rgba(255,255,255,0.03);
+        }
+
+        h3 {
+            color: var(--heading-color);
+            margin: 3.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: "—";
+            color: #444;
+            position: absolute;
+            left: 0;
+            font-weight: 300;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            border-bottom-color: #fff;
+            color: #fff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 5rem 2rem;
+            font-size: 0.75rem;
+            color: #444;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 600px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Viktor Kocur</h1>
+        <h2>3D Vision | Deep Learning</h2>
+    </header>
+
+    <div class="container">
+        <div class="profile-section">
+            <img src="https://avatars.githubusercontent.com/u/18339124?s=400&u=e8f50076b20ac593b99ab6d6ceccd16951087f9d&v=4" alt="Viktor Kocur" class="profile-img">
+        </div>
+
+        <section id="education">
+            <h3>Education and Qualifications</h3>
+            <ul>
+                <li><strong>2026</strong> - Habilitation (Associate Professor) - Computer Science - FMPH, Comenius University in Bratislava</li>
+                <li><strong>2017-2021</strong> - PhD. Computer Science at FMPH, Comenius University in Bratislava</li>
+                <li><strong>2015-2017</strong> - Ing. Computational Physics at FNSPE, CTU in Prague</li>
+                <li><strong>2012-2015</strong> - Bc. Computational Physics at FNSPE, CTU in Prague</li>
+            </ul>
+        </section>
+
+        <section id="work">
+            <h3>Work</h3>
+            <ul>
+                <li><strong>2021-present</strong> - Assistant Professor at FMPH, Comenius University in Bratislava</li>
+                <li><strong>2021-2023</strong> - Postdoc at FIT, BUT in Brno</li>
+            </ul>
+        </section>
+
+        <section id="highlights">
+            <h3>Project Highlights</h3>
+            <ul>
+                <li><strong>RePoseD</strong> - Relative Pose Estimation with MDE Estimated Depth (ICCV Oral) — <a href="https://kocurvik.github.io/reposed" target="_blank">Project Page</a></li>
+                <li><strong>Depth2Pose</strong> - Evaluating MDEs without GT Depth — <a href="https://kocurvik.github.io/depth2pose" target="_blank">Project Page</a></li>
+                <li><strong>UriTrack</strong> - Simple Urinary Health Tracking App for Android — <a href="https://play.google.com/store/apps/details?id=com.kocur.tabapp" target="_blank">Google Play</a></li>
+                <li><strong>PoseLib Contributions</strong> - Some of the methods I helped develop are included in Viktor Larsson's PoseLib library — <a href="https://github.com/PoseLib/PoseLib" target="_blank"><i class="fab fa-github"></i> PoseLib/PoseLib</a></li>
+            </ul>
+        </section>
+
+        <section id="publications">
+            <h3>Publications</h3>
+            <p>My ORCID is: <a href="https://orcid.org/0000-0001-8752-2685" target="_blank">0000-0001-8752-2685</a></p>
+            <p style="margin-top: 1rem;">
+                Check out my publications on 
+                <a href="https://scholar.google.com/citations?user=9vesUuQAAAAJ&hl=en" target="_blank">Google Scholar</a> or 
+                <a href="https://www.researchgate.net/profile/Viktor-Kocur" target="_blank">ResearchGate</a>.
+            </p>
+        </section>
+
+        <section id="code">
+            <h3>Published Code</h3>
+            <p>I usually publish code related to my research activities on 
+                <a href="https://github.com/kocurvik" target="_blank"><i class="fab fa-github"></i> my GitHub</a>.
+            </p>
+        </section>
+
+        <section id="teaching">
+            <h3>Teaching</h3>
+            <p>I currently teach computer vision courses at FMPH, Comenius University in Bratislava. Materials can be found in 
+                <a href="https://github.com/kocurvik/edu" target="_blank"><i class="fab fa-github"></i> kocurvik/edu</a>.
+            </p>
+        </section>
+
+        <footer>
+            &copy; 2026 Viktor Kocur
+        </footer>
+    </div>
+
+</body>
+</html>
