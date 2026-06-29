@@ -170,6 +170,19 @@
             .names { font-size: 2.2rem; }
         }
 		
+		.map-container {
+			width: 100%;
+			max-width: 640px;
+			margin: 0 auto;
+			aspect-ratio: 4 / 3;
+		}
+
+		.map-container iframe {
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+
 		.credit {
 			font-family: 'Arimo', sans-serif; /* Using your cleaner font for the credit */
 			font-size: 0.75rem;
@@ -221,7 +234,9 @@
 		
 		<section id="parking">
 		<h3>Parkovanie</h3>
-		<iframe src="https://www.google.com/maps/d/embed?mid=1DVHzTgwZNuHbPraEQvsQIJdZtBEAe0U&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+		<div class="map-container">
+			<iframe src="https://www.google.com/maps/d/embed?mid=1DVHzTgwZNuHbPraEQvsQIJdZtBEAe0U&ehbc=2E312F&noprof=1" loading="lazy"></iframe>
+		</div>
 		</section>
 
 <!--        <section id="details">
