@@ -95,7 +95,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // --- UPDATE THESE WHEN THE WASTE COLLECTION SCHEDULE CHANGES ---
             const recycledWasteDates = [
-                	"14.1.26", "11.2.26", "11.3.26", "8.4.26", "6.5.26", "3.6.26", "1.7.26", "29.7.26" , "26.8.25", "23.9.25", "21.10.25", "18.11.25", "16.12.25"
+                	"14.1.26", "11.2.26", "11.3.26", "8.4.26", "6.5.26", "3.6.26", "1.7.26", "29.7.26" , "26.8.26", "23.9.26", "21.10.26", "18.11.26", "16.12.26"
             ];
             const COMMON_WASTE_DAY = 4; // Thursday (0 = Sunday)
             const GARDEN_BIO_WASTE_DAY = 5; // Friday
@@ -189,7 +189,7 @@
             document.getElementById('today-date').innerText = `${formatDate(today)} (${getDayOfWeek(today)})`;
 
             nextRecycled = getNextDate(recycledWasteDates);
-			nextRecycled.setHours(0, 0, 0, 0);
+			if (nextRecycled) nextRecycled.setHours(0, 0, 0, 0);
             nextCommon = getNextCommonWaste();
             nextCommon.setHours(0, 0, 0, 0);
 			nextGardenBio = getNextGardenBioWaste();
